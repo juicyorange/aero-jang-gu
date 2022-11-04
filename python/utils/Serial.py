@@ -4,7 +4,7 @@ import serial
 import time
 
 class Serial:
-    def __init__(self, port, baudrate=19200,):
+    def __init__(self, port, baudrate=19200):
         self.port = port
         self.baudrate = baudrate
         self.arduino = None
@@ -41,15 +41,13 @@ class Serial:
         self.arduino.readline()
         self.arduino.readline()
         
-        print("start get sampe data...")
-        
+        print("\nPress the Reset button to start importing samples...")
         while(now_count < max_count):
             if self.arduino.readable():
                 try :
                     data = self.arduino.readline().decode('utf-8').strip()
                 except :
                     data = self.arduino.readline().decode('utf-8').strip()
-                print(data)
                 if data == start_message: 
                     # flush dummy data
                     if now_count == -1:
